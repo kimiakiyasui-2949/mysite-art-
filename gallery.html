@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <p class="menu">manu</p>
+        <div id="hamburger-menu" class="hamburger-menu">
+    <span class="close-btn">&times;</span>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="relax.html">About</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</div>
+    <section>
+        <img src="110st newyork.jpg" class="photo">
+        <p class="text">guide tuarnin matroporitan muisum most famous musium in the would absoruty nice</p>
+    </section>
+    <section>
+        <p>guide tuarnin matroporitan muisum most famous musium in the would absoruty nice</p>
+         <p class="text-2">guide tuarnin matroporitan muisum most famous musium in the would absoruty nice</p>
+    </section>
+    <hr>
+    <footer>
+    o1 srt work<br>
+    short film<br>
+    diamond is sky
+</footer>
+
+    <style>
+        section {
+      position: relative;
+      }
+
+        .photo{
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .text{
+            position: absolute;
+            top:10px;
+            color: white;
+            left:200px;
+        }
+        .text-2{
+            font-size: 30px;
+        }
+        footer{
+    padding-top: 400px;
+    padding-bottom: 30px ;
+    padding-left: 24px;
+}
+      /* ハンバーガーメニュー初期状態（非表示） */
+.hamburger-menu {
+    position: fixed;
+    top: 0;
+    left: -50%;
+    width: 50%;
+    height: 100%;
+    background-color: rgba(188, 14, 14, 0.95);
+    color: rgb(10, 10, 10);
+    opacity: 0;
+    transition: all 0.5s ease;
+    z-index: 1000;
+    padding: 60px 20px;
+    box-sizing: border-box;
+
+}
+
+/* activeでスライド＆フェードイン */
+.hamburger-menu.active {
+    left: 0;
+    opacity: 1;
+}
+
+/* メニューリスト */
+.hamburger-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 40px 0 0 0;
+
+  
+}
+.hamburger-menu li {
+    margin: 20px 0;
+    
+    
+}
+.hamburger-menu a {
+    color: rgb(11, 11, 11);
+    text-decoration: none;
+    font-size: 12px;
+   
+}
+.hamburger-menu a:hover {
+    color: rgb(246, 243, 243);
+    text-decoration: none;
+    font-size: 30px;
+}
+
+/* Closeボタン */
+.hamburger-menu .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+}        
+        .menu{
+            cursor: pointer;
+        }
+
+        @media(max-width: 768px){
+          .text {
+            position: absolute;
+            left:29%;
+            font-size: 8px;
+           読めないので一旦8にする */
+         
+                /* ← スマホのとき中央寄せが効く */
+          }
+        }
+    </style>
+    <script>
+// メニュー開閉処理
+const menuBtn = document.querySelector('.menu');
+const hamburger = document.getElementById('hamburger-menu');
+const closeBtn = document.querySelector('.hamburger-menu .close-btn');
+
+menuBtn.addEventListener('click', () => {
+    hamburger.classList.add('active');
+});
+
+closeBtn.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+});
+</script>
+</body>
+</html>
