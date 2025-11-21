@@ -14,7 +14,7 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="relax.html">About</a></li>
         <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="#">Contact</a></li>
+       
     </ul>
 </div>
     <section>
@@ -27,36 +27,95 @@
     </section>
     <hr>
     <footer>
-    o1 srt work<br>
-    short film<br>
-    diamond is sky
+      <p> guest house<br>
+    for talvel<br>
+    information</p>
+    <p class="text-9">★★★★</p>
+    
+    <p class="text-10">kfndmd.gmail.com</p>
 </footer>
 
     <style>
+      html, body{
+        margin: 0;
+      }
         section {
       position: relative;
       }
 
-        .photo{
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-        }
+      
+    .photo{
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      /* 初期は透明・少し下にずらす */
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
 
-        .text{
-            position: absolute;
-            top:10px;
-            color: white;
-            left:200px;
-        }
+    /* visible を付けるとフェードイン */
+    .photo.visible{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .text {
+      position: absolute;
+      top: 10px;
+      left: 200px;
+      color: white;
+
+      /* テキストのフェードイン用初期値 */
+      opacity: 0;
+      transform: translateY(10px); /* 少し下から */
+      transition: opacity 1s ease, transform 1s ease;
+      /* 表示順を上にしたいなら z-index を追加 */
+      z-index: 2;
+      max-width: 70%;
+    }
+    p {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+p.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+    .text.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
         .text-2{
             font-size: 30px;
         }
         footer{
+    position: relative;
     padding-top: 400px;
     padding-bottom: 30px ;
     padding-left: 24px;
 }
+    footer p{
+      position: absolute;
+      bottom: 58px;
+    }
+    .text-9{
+      position: absolute;
+      bottom: 30px;
+      
+    }
+    .text-10{
+      position: absolute;
+      left:26px;
+      bottom: 2px;
+      top: auto;
+     
+    }
+
       /* ハンバーガーメニュー初期状態（非表示） */
 .hamburger-menu {
     position: fixed;
@@ -115,18 +174,36 @@
 }        
         .menu{
             cursor: pointer;
+            font-weight: bold;
         }
 
         @media(max-width: 768px){
-          .text {
-            position: absolute;
-            left:29%;
-            font-size: 8px;
-           読めないので一旦8にする */
-         
-                /* ← スマホのとき中央寄せが効く */
-          }
-        }
+         @media(max-width: 768px){
+  .text {
+    position: absolute;
+    left:29%;
+    font-size: 8px;
+    /* 読めないので一旦8にする */
+  }
+   footer p{
+      position: absolute;
+      bottom: 48px;
+      font-size: 12px;
+    }
+    .text-9{
+      position: absolute;
+      bottom: 30px;
+      
+    }
+    .text-10{
+      position: absolute;
+      left:26px;
+      bottom: 2px;
+      top: auto;
+     
+    }
+}
+
     </style>
     <script>
 // メニュー開閉処理
@@ -141,6 +218,34 @@ menuBtn.addEventListener('click', () => {
 closeBtn.addEventListener('click', () => {
     hamburger.classList.remove('active');
 });
+// 画像フェードイン（ロード時）
+const img = document.querySelector('.photo');
+    const text = document.querySelector('.text');
+
+    function showElements() {
+      img.classList.add('visible');
+      text.classList.add('visible');
+    }
+
+    // 画像の load イベントだけに頼らず、ページロードでも確実に実行する
+    if (img.complete) {
+      // キャッシュされている場合でも一応少し遅延させてスタイルが読み込まれるのを待つ
+      requestAnimationFrame(() => requestAnimationFrame(showElements));
+    } else {
+      img.addEventListener('load', showElements);
+      // 万が一画像が遅延してロードされなくても、ページの load で表示する
+      window.addEventListener('load', showElements);
+    }
+    window.addEventListener("load", () => {
+  const paragraphs = document.querySelectorAll("p"); // 全ての p を取得
+  paragraphs.forEach((p, i) => {
+    setTimeout(() => {
+      p.classList.add("visible");
+    }, i * 150); // ← 0.15秒ずつずらして順番にフェード（いい感じ）
+  });
+});
+
+
 </script>
 </body>
 </html>

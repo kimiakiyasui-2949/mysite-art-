@@ -13,7 +13,7 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="relax.html">About</a></li>
         <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="#">Contact</a></li>
+       
     </ul>
 </div>
 
@@ -30,11 +30,11 @@
     </section>
     <section>
     <section class="main">
-        <img src="New York6.jpg" class="photo">
+        <img src="New York6.jpg"  class="photo fade-in" id="ny-photo">
         <p class="text-3">guide tuarnin matroporitan muisum most famous musium in the would absoruty nice</p>
         <p class="text-7">guide tuarnin matroporitan muisum most<br> famous musium in the would absoruty nice</p>
         <div class="image-text-box">
-    <img src="show.jpg" class="photo-2">
+    <img src="show.jpg" class="photo-2 fade-in" id="show-photo">
     <p class="text-8">guide tuarnin matroporitan muisum most<br>famous musium in the would absoruty nice</p>
 </div>
 
@@ -51,10 +51,14 @@
 </section>
 <hr>
 <footer>
-    o1 srt work<br>
-    short film<br>
-    diamond is sky
+      <p> guest house<br>
+    for talvel<br>
+    information</p>
+     <p class="text-9">★★★★</p>
+    
+    <p class="text-10">kfndmd.gmail.com</p>
 </footer>
+
        
     
 
@@ -118,6 +122,7 @@
 }        
         .menu{
             cursor: pointer;
+            font-weight: bold;
         }
         
         .manu{
@@ -156,6 +161,16 @@
     .main{
         display: flex;
     }
+    .fade-in {
+    opacity: 0;                /* 初期は透明 */
+    transform: translateY(20px); /* 下から少し移動させる */
+    transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+.fade-in.show {
+    opacity: 1;
+    transform: translateY(0); /* 元の位置に戻る */
+}
     .text-5{
         text-align: center;
     }
@@ -171,6 +186,7 @@
           
         
         }
+        
         .text-{
             position: absolute;
             left: 50%;
@@ -196,8 +212,8 @@
 
        .text-8{
     position: static; /* ← absolute削除 */
-    font-size: 8px;  /* 好きに調整OK */
-    padding-left: 8px;
+    font-size: 40px;  /* 好きに調整OK */
+    padding-left: 46px;
     margin-top:40px;
     top: 50px;
 }
@@ -233,14 +249,47 @@
     height: auto;
 
 }
+.typewriter {
+    display: inline-block;        /* 位置固定 */
+    white-space: pre;             /* スペースや改行をそのまま表示 */
+    overflow: hidden;             /* はみ出した文字を隠す */
+    border-right: 3px solid black; /* カーソル */
+    animation: typing 4s steps(60, end), blink 0.75s step-end infinite;
+}
+
+/* typingアニメーション（文字幅単位で切る） */
+@keyframes typing {
+    from { width: 0ch; }
+    to { width: 60ch; }  /* 文字数に合わせて調整 */
+}
+
+/* カーソル点滅 */
+@keyframes blink {
+    0%, 50%, 100% { border-color: black; }
+    25%, 75% { border-color: transparent; }
+}
+
 
 
 footer{
+    position: relative;
     padding-top: 400px;
     padding-bottom: 30px ;
     padding-left: 24px;
 }
-@media (max-width: 480px){
+.text-9{
+    position: absolute;
+    left: 23px;
+    bottom: 2px;
+    
+}
+.text-10{
+    position: absolute;
+    left: 23px;
+
+}
+
+@media (max-width: 768px){
 
     .text-2{
         font-size: 20px;
@@ -262,7 +311,7 @@ footer{
     }
 
     .photo-2{
-        width: 200px;
+        width: 215px;
         height: 120px;
     }
 
@@ -276,24 +325,48 @@ footer{
         font-size: 12px;
     }
 
-    .main .text-7{
-            position: absolute;
-            left: 210px;
-            top: 1060px;
-            font-size: 7px;
-            {
+      .main .text-7{
+        position: absolute;
+        left: 210px;
+        top: 1060px;
+        font-size: 7px;
+    } /* ← ← ← ここ閉じカッコ必須！！ */
 
-        .text-8 {
-        
+    .main .text-8{
         padding-left: 18px;
-        font-size: 10px; /* ← スマホ用のサイズ！ */
-        
+        font-size: 7px !important;  /* ← 修正済み */
     }
     footer{
     padding-top: 200px;
     padding-bottom: 30px ;
     padding-left: 24px;
    }
+   .fade-in {
+    opacity: 0;                 /* 初期は透明 */
+    transition: opacity 2s ease; /* フェードイン時間 */
+}
+
+/* 表示時に opacity 1 に */
+.fade-in.show {
+    opacity: 1;
+}
+footer p{
+      position: absolute;
+      bottom: 48px;
+      font-size: 10px;
+    }
+    .text-9{
+      position: absolute;
+      bottom: 30px;
+      
+    }
+    .text-10{
+      position: absolute;
+      left:24px;
+      bottom: 2px;
+      top: auto;
+     
+    }
  
 
 }
@@ -311,6 +384,22 @@ menuBtn.addEventListener('click', () => {
 
 closeBtn.addEventListener('click', () => {
     hamburger.classList.remove('active');
+});
+document.addEventListener('DOMContentLoaded', () => {
+    const faders = document.querySelectorAll('.fade-in');
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+                observer.unobserve(entry.target); // 一度表示したら監視解除
+            }
+        });
+    }, {
+        threshold: 0.1 // 10% 見えたらフェードイン
+    });
+
+    faders.forEach(fader => observer.observe(fader));
 });
 </script>
 
