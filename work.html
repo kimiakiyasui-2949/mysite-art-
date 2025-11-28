@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <section class="main">
@@ -91,7 +93,7 @@
 @keyframes textColorCycle {
     0%   { color: white; }
     25%  { color: rgb(8, 181, 239); }
-    50%  { color: rgb(238, 22, 51); }
+    50%  { color: rgb(151, 15, 33); }
     100% { color: white; }
 }
 
@@ -236,6 +238,7 @@
     max-width: 100%; 
 }
 @media (max-width: 576px) {
+        
     
         .main .work{
             position: absolute;
@@ -271,12 +274,18 @@
             text-align: center;
             
         }
-        .text-2{
-         font-weight: 700;   /* 太字 */
-letter-spacing: -1px; /* 文字を詰める */
+        .text-2 {
+        font-size: 20px;      /* スマホ用サイズに縮小 */
+        top: 10px;             /* 上から10px */
+        left: 2px;            /* 左から10px */
+        margin: 0;
+        padding: 0;
+        font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+    }
 
-
-        }
         .photo{
             text-align: center;
             width: 210px;;
